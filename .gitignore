@@ -1,0 +1,9 @@
+.DS_Store
+drive-download-*.zip
+
+# Source material and original videos stay local.
+/perch_iros/
+/IROS26.mp4
+/pole_demo_2.0.mp4
+/grasp_demo_2.0.mp4
+/stopsign_demo_2.0.mp4

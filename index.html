@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grasping as Anchoring</title>
+  <meta name="description" content="Grasping as Anchoring: Expanding Urban Perching with a Hybrid Gripper for Aerial Robots.">
+  <meta property="og:title" content="Grasping as Anchoring">
+  <meta property="og:description" content="Expanding urban perching with a hybrid gripper for aerial robots.">
+  <meta property="og:image" content="https://ziyiwang54.github.io/perch_iros/assets/images/hero.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202124;
+      --muted: #5f6368;
+      --line: #d8dee4;
+      --paper: #ffffff;
+      --wash: #f6f8fa;
+      --green: #1d7f58;
+      --red: #c0392b;
+      --gold: #b7791f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    img, video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.94);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    nav .brand {
+      font-weight: 800;
+      color: var(--green);
+      white-space: nowrap;
+    }
+
+    nav .links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    .hero {
+      padding: 54px 0 34px;
+      background:
+        linear-gradient(180deg, #f7fbf8 0%, #ffffff 72%),
+        var(--paper);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--red);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 0 auto 18px;
+      text-align: center;
+      font-size: 44px;
+      line-height: 1.08;
+      font-weight: 850;
+    }
+
+    .authors {
+      max-width: 940px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .actions {
+      margin: 26px auto 30px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid var(--green);
+      padding: 10px 16px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .button.secondary {
+      background: #fff;
+      color: var(--green);
+    }
+
+    .hero-figure {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--wash);
+      box-shadow: 0 18px 50px rgba(32, 33, 36, 0.10);
+    }
+
+    main section {
+      padding: 52px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 900px;
+      font-size: 18px;
+      color: #3f4448;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .card-body { padding: 16px; }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .video-main {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 18px;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--line);
+      background: var(--wash);
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #24292f;
+      color: #f6f8fa;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    footer {
+      padding: 32px 0 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    @media (max-width: 820px) {
+      h1 { font-size: 34px; }
+      .hero { padding-top: 34px; }
+      nav { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      nav .links { justify-content: flex-start; }
+      .grid, .two { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .wrap { width: min(100% - 22px, 1120px); }
+      h1 { font-size: 29px; }
+      .authors { font-size: 15px; }
+      main section { padding: 38px 0; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Site navigation">
+      <a class="brand" href="#">Grasping as Anchoring</a>
+      <div class="links">
+        <a href="#abstract">Abstract</a>
+        <a href="#video">Video</a>
+        <a href="#figures">Figures</a>
+        <a href="#citation">Citation</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" style="text-align:center;">Aerial manipulation and urban perching</p>
+      <h1>Grasping as Anchoring: Expanding Urban Perching with a Hybrid Gripper for Aerial Robots</h1>
+      <p class="authors">
+        Ziyin Han, Bihao Mo, Sheng Cheng, Rong Wang, Ziyi Wang, Junjie Gao,
+        Hung Tien Pham, Van Anh Ho, and Naira Hovakimyan
+      </p>
+      <div class="actions" aria-label="Paper links">
+        <a class="button" href="assets/paper/perch_iros.pdf">Download PDF</a>
+        <a class="button secondary" href="#video">Watch Videos</a>
+      </div>
+      <figure class="hero-figure">
+        <img src="assets/images/hero.png" alt="Perching demonstrations and autonomy pipeline overview.">
+      </figure>
+    </div>
+  </section>
+
+  <main>
+    <section id="abstract">
+      <div class="wrap">
+        <h2>Abstract</h2>
+        <p class="lead">
+          Aerial manipulation demands end-effectors that can support both grasping and perching.
+          Existing designs often split between compliant grippers that adapt to objects but lack
+          perching stiffness, and stiff perching mechanisms that are tied to narrow target geometries.
+          We present a hybrid aerial manipulation system that decouples the anchoring load path from
+          a compliant grasping interface, allowing manipulable objects to serve as anchoring interfaces
+          for urban perching.
+        </p>
+        <p class="lead">
+          The system embeds a coaxial eye-in-hand camera for zero-parallax terminal alignment and uses
+          an L1 adaptive controller for robust flight under aerodynamic and payload disturbances.
+          Experiments demonstrate grasping of everyday objects, perching on diverse pole geometries,
+          and stop-sign perching through a graspable adapter.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="grid">
+          <article class="card">
+            <div class="card-body">
+              <span class="tag">Mechanics</span>
+              <h3>Decoupled Load Paths</h3>
+              <p>A rigid exoskeleton carries perching loads while the ROSE membrane remains compliant for grasping.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <span class="tag">Perception</span>
+              <h3>Coaxial Visual Servoing</h3>
+              <p>An embedded downward camera aligns sensing with the gripper axis through terminal contact.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <span class="tag">Capability</span>
+              <h3>Perch-While-Grasping</h3>
+              <p>The robot grasps an adapter, transports it, and uses it to perch on a thin stop-sign edge.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="wrap">
+        <h2>Videos</h2>
+        <div class="video-main">
+          <video controls preload="metadata" poster="assets/images/hero.png">
+            <source src="assets/videos/iros26.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <video controls preload="metadata">
+              <source src="assets/videos/pole_demo.mp4" type="video/mp4">
+            </video>
+            <div class="card-body">
+              <h3>Pole Perching</h3>
+              <p>Autonomous terminal alignment and perching on pole-head targets.</p>
+            </div>
+          </article>
+          <article class="card">
+            <video controls preload="metadata">
+              <source src="assets/videos/grasp_demo.mp4" type="video/mp4">
+            </video>
+            <div class="card-body">
+              <h3>Object Grasping</h3>
+              <p>Transport-and-release with everyday payloads of varied shape and mass.</p>
+            </div>
+          </article>
+          <article class="card">
+            <video controls preload="metadata">
+              <source src="assets/videos/stopsign_demo.mp4" type="video/mp4">
+            </video>
+            <div class="card-body">
+              <h3>Stop-Sign Perching</h3>
+              <p>Two-stage adapter grasping followed by perching on a thin sign edge.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="figures">
+      <div class="wrap">
+        <h2>Selected Figures</h2>
+        <div class="grid two">
+          <figure class="card">
+            <img src="assets/images/gripper.png" alt="Engineering drawing of the coaxial hybrid gripper.">
+            <figcaption>Coaxial hybrid gripper with a rigid exoskeleton and embedded camera.</figcaption>
+          </figure>
+          <figure class="card">
+            <img src="assets/images/urban.png" alt="Examples of urban perching targets and sign perching.">
+            <figcaption>Urban fixtures and sign edges enabled by graspable anchoring interfaces.</figcaption>
+          </figure>
+          <figure class="card">
+            <img src="assets/images/torque.png" alt="Torque experiment comparing hybrid and soft grippers.">
+            <figcaption>The hybrid gripper sustains higher off-center torque through the rigid shell.</figcaption>
+          </figure>
+          <figure class="card">
+            <img src="assets/images/poles.png" alt="Pole head geometries used in experiments.">
+            <figcaption>Landing-pole head geometries used for perching experiments.</figcaption>
+          </figure>
+          <figure class="card">
+            <img src="assets/images/grasp.png" alt="Aerial grasping demonstrations with diverse objects.">
+            <figcaption>Transport-and-release with diverse objects along an identical trajectory.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="wrap">
+        <h2>Citation</h2>
+<pre><code>@misc{han2026grasping,
+  title = {Grasping as Anchoring: Expanding Urban Perching with a Hybrid Gripper for Aerial Robots},
+  author = {Han, Ziyin and Mo, Bihao and Cheng, Sheng and Wang, Rong and Wang, Ziyi and Gao, Junjie and Pham, Hung Tien and Ho, Van Anh and Hovakimyan, Naira},
+  year = {2026},
+  note = {Manuscript}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      University of Illinois Urbana-Champaign and Japan Advanced Institute of Science and Technology.
+    </div>
+  </footer>
+</body>
+</html>
